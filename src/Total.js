@@ -1,7 +1,7 @@
-const Total = (props) => {
+const Total = props => {
     return (
       <div>
-        <p>{props.exercises}</p>
+        <p>Total Exercises: {props.exercises}</p>
       </div>
     )
   }

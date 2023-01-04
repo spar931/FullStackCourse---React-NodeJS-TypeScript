@@ -1,20 +1,17 @@
-const Content = () => {
-    const part1 = 'Fundamentals of React'
-    const part2 = 'Using props to pass data'
-    const part3 = 'State of a component'
+const Content = props => {
     return (
       <div>
-        <Part part={part1}/>
-        <Part part={part2}/>
-        <Part part={part3}/>
+        <Part part={props.part1}/>
+        <Part part={props.part2}/>
+        <Part part={props.part3}/>
       </div>
     )
   }
 
-const Part = (props) => {
+const Part = props => {
     return (
       <div>
-        <p>{props.part}</p>
+        <p>{props.part.name}, Number of Exercises: {props.part.exercises}</p>
       </div>
     )
   }
