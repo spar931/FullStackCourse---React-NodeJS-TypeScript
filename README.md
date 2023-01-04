@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Description
+
+13 part online fullstack course at [https://fullstackopen.com/en/#course-contents]
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
