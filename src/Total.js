@@ -1,7 +1,7 @@
-const Total = props => {
+const Total = ({parts}) => {
     return (
       <div>
-        <p>Total Exercises: {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}</p>
+        <p>Total Exercises: {parts[0].exercises + parts[1].exercises + parts[2].exercises}</p>
       </div>
     )
   }

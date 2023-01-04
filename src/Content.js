@@ -1,18 +1,19 @@
-const Content = props => {
-    console.log(props)
+const Content = ({parts}) => {
+    console.log(parts)
     return (
       <div>
-        <Part part={props.parts[0]}/>
-        <Part part={props.parts[1]}/>
-        <Part part={props.parts[2]}/>
+        <Part name={parts[0].name} exercises={parts[0].exercises} />
+        <Part name={parts[1].name} exercises={parts[1].exercises} />
+        <Part name={parts[2].name} exercises={parts[2].exercises} />
       </div>
     )
   }
 
-const Part = props => {
+const Part = ({name, exercises}) => {
+    console.log(name)
     return (
       <div>
-        <p>{props.part.name}, No. of Exercises: {props.part.exercises}</p>
+        <p>{name}, No. of Exercises: {exercises}</p>
       </div>
     )
   }
