@@ -1,0 +1,29 @@
+React:
+1. do not mutate state directly i.e. concact over push for arrays, setting state to new object with updated attribute(s) 
+rather than directly changing an existing object's attribute
+
+2. useful to debug using props without destructuring first
+
+3. when using console.log to debug, use commas not plus operator to combine objects i.e. console.log('props value is', props) 
+
+4. Can also add 'debugger' anywhere in code to pause execution once it arrives to the debugger command.
+Or just add breakpoints and/or use controls in the 'Sources' tab in developer tools.
+
+5. Do not useState or useEffect inside a loop, conditional expression, or any place that is not a function defining a component.
+Otherwise the app will behave erratically and hooks may not always be called in the same order.
+
+6. Event handlers must always be a function or a reference to a function. 
+If using function call i.e. function(), then the function will be called every render. If using reference to function i.e. function, passes reference
+only when there is a click event.
+
+i.e. if not a direct function call = <button onClick={() => console.log('clicked the button')}>buttontext</button>
+or can define a function
+i.e.    const handleClick = () => {    console.log('clicked the button')    setValue(0)  }
+        return (
+            <div>
+                {value}
+                <button onClick={handleClick}>button</button>
+            </div>
+        )
+
+7. Do not define components inside other components as it will then be treated as a new component in every render
