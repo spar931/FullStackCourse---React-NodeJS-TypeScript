@@ -9,13 +9,7 @@ const Content = ({parts}) => {
     )
   }
 
-const Part = ({name, exercises}) => {
-    console.log(name)
-    return (
-      <div>
-        <p>{name}, No. of Exercises: {exercises}</p>
-      </div>
-    )
-  }
+const Part = ({name, exercises}) => <div><p>{name}, No. of Exercises: {exercises}</p></div>
+    
 
 export default Content
