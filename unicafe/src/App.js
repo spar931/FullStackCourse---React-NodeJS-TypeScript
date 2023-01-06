@@ -2,11 +2,12 @@
 import { useState } from 'react'
 import Button from './Button'
 
-const StatisticLine = ({text, stat}) => {
+const StatisticLine = ({text, stat, sign}) => {
     return (
-        <div>
-            <p>{text} {stat}</p>
-        </div>
+            <tr>
+                <td>{text}</td>
+                <td>{stat}{sign}</td>
+            </tr>
     )
 }
 
@@ -14,12 +15,16 @@ const Statistics = ({stat1, stat2, stat3}) => {
     if ((stat1 + stat2 + stat3) > 0) {
         return (
             <div>
-                <StatisticLine text='good' stat={stat1} />
-                <StatisticLine text='neutral' stat={stat2} />
-                <StatisticLine text='bad' stat={stat3} />
-                <StatisticLine text='all' stat={stat1 + stat2 + stat3} />
-                <StatisticLine text='average' stat={((stat1 * 1) + (stat2 * 0) + (stat3 * -1)) / (stat1 + stat2 + stat3)} />
-                <StatisticLine text='positive' stat={(stat1 / (stat2 + stat3 + stat1)) * 100} />
+                <table>
+                    <tbody>
+                        <StatisticLine text='good' stat={stat1} />
+                        <StatisticLine text='neutral' stat={stat2} />
+                        <StatisticLine text='bad' stat={stat3} />
+                        <StatisticLine text='all' stat={stat1 + stat2 + stat3} />
+                        <StatisticLine text='average' stat={((stat1 * 1) + (stat2 * 0) + (stat3 * -1)) / (stat1 + stat2 + stat3)} />
+                        <StatisticLine text='positive' stat={(stat1 / (stat2 + stat3 + stat1)) * 100} sign='%' />
+                    </tbody>
+                </table>
             </div>
         )
     }
