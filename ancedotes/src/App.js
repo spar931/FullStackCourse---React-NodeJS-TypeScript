@@ -1,4 +1,4 @@
-//Exercises 1.12 to 1.16
+//Exercises 1.12 to 1.14
 import { useState } from 'react'
 
 const Button = ({onClick, text}) => <button onClick={onClick}>{text}</button>
@@ -17,15 +17,21 @@ const App = () => {
   const [selected, setSelected] = useState(0)     
   const [allVotes, setAll] = useState(new Array(7).fill(0))
   const copy = [ ...allVotes ]
+
   const incrementByOne = () => {    copy[selected] += 1;    setAll(copy)  }
+
+  const max_val = Math.max(...allVotes);
+  const max_index = allVotes.indexOf(max_val);
 
   return (
     <div>
+      <h1>Ancedote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <p>has {allVotes[selected]} votes</p>
-      
       <Button text='vote' onClick={incrementByOne} />
       <Button text='next ancedote' onClick={() => setSelected(Math.floor(Math.random() * 7))} />
+      <h1>Ancedote with most votes</h1>
+      <p>{anecdotes[max_index]}</p>
     </div>
   )
 }
