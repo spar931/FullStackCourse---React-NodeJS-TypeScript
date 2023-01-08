@@ -16,8 +16,8 @@ Otherwise the app will behave erratically and hooks may not always be called in 
 If using function call i.e. function(), then the function will be called every render. If using reference to function i.e. function, passes reference
 only when there is a click event.
 
-i.e. if not a direct function call = <button onClick={() => console.log('clicked the button')}>buttontext</button>
-or can define a function
+i.e. create new function inside curly brackets = <button onClick={() => console.log('clicked the button')}>buttontext</button>
+or can define a function outside
 i.e.    const handleClick = () => {    console.log('clicked the button')    setValue(0)  }
         return (
             <div>
