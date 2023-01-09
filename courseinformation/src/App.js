@@ -1,8 +1,6 @@
 // Exercises 1.1 to 1.5
 // Exercises 2.1 to 2.5
-import Header from './Header'
-import Content from './Content'
-import Total from './Total'
+import Course from './Course'
 
 const App = () => {
   const courses = [
@@ -58,16 +56,6 @@ const App = () => {
           course={course}
         />
       )}
-    </div>
-  )
-}
-
-const Course = ({course}) => {
-  return (
-    <div>
-      <Header name={course.name} />
-      <Content parts={course.parts} />
-      <Total parts={course.parts} />
     </div>
   )
 }

@@ -9,9 +9,9 @@ const Content = ({parts}) => {
         )}
       </div>
     )
-  }
+}
 
-const Part = ({name, exercises}) => <div><p>{name}, No. of Exercises: {exercises}</p></div>
+const Part = ({name, exercises}) => <div><p>{name} {exercises}</p></div>
     
 
 export default Content
