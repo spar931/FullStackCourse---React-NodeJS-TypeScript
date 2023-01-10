@@ -3,12 +3,12 @@ import { useState } from 'react'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'arto hellas' }
   ]) 
   const [newName, setNewName] = useState('')
 
   const handleNameChange = (event) => {
-    setNewName(event.target.value)
+    setNewName(event.target.value.toLowerCase())
   }
 
   const addName = (event) => {
@@ -16,8 +16,12 @@ const App = () => {
     const nameObject = {
       name : newName
     }
-    setPersons(persons.concat(nameObject))
-    setNewName('')
+    if (persons.some(person => person.name === newName)) {
+      alert(`${newName} is already added to phonebook`)
+    } else {
+      setPersons(persons.concat(nameObject))
+      setNewName('')
+    }
   }
 
   return (
