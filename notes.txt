@@ -27,3 +27,7 @@ i.e.    const handleClick = () => {    console.log('clicked the button')    setV
         )
 
 7. Do not define components inside other components as it will then be treated as a new component in every render
+
+8. Use conditional operator ? i.e. const result = condition ? val1 : val2.  result set to val1 if condition is true otherwise result set to val2.
+
+9. Important array functions: map, reduce, filter
