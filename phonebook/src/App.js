@@ -1,13 +1,20 @@
-// Exercises 2.6 to 2.10
-import { useState } from 'react'
+// Exercises 2.6 to 2.11
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'arto hellas', number: '040-123456', id: 1 },
-    { name: 'ada lovelace', number: '39-44-5323523', id: 2 },
-    { name: 'dan abramov', number: '12-43-234345', id: 3 },
-    { name: 'mary poppendieck', number: '39-23-6423122', id: 4 }
-  ]) 
+  const [persons, setPersons] = useState([]) 
+
+  useEffect(() => {    
+    console.log('effect')    
+    axios      
+      .get('http://localhost:3001/persons')      
+      .then(response => {        
+        console.log('promise fulfilled')        
+        setPersons(response.data)      
+      })  
+    }, [])  
+    console.log('render', persons.length, 'persons')
 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
