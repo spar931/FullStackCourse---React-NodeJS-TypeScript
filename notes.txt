@@ -29,3 +29,8 @@ i.e.    const handleClick = () => {    console.log('clicked the button')    setV
 7. Do not define components inside other components as it will then be treated as a new component in every render
 
 8. Use conditional operator ? i.e. const result = condition ? val1 : val2.  result set to val1 if condition is true otherwise result set to val2.
+
+9. npm install axios - to use axios library
+   npm install json-server --save-dev - to install json-server as a development dependency
+   npm run server to start the json-server
+   add "server": "json-server -p3001 --watch db.json" to package.json scripts in order to use command 'npm run server'
