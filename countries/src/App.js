@@ -27,39 +27,31 @@ function App() {
       find countries <input onChange={handleFilterChange}/>
       <Countries countries={countries} search={newFilter}/>
     </div>
-  );
+  )
 }
 
 
 const Countries = ({countries, search}) => {
   const filteredCountries = countries.filter(country => country.name.includes(search))
 
-  if (filteredCountries.length === 1) {
-    return (
-      <div>
-        <h1>{filteredCountries[0].name}</h1>
-          <p>capital {filteredCountries[0].capital}</p>
-          <p>area {filteredCountries[0].area}</p>
+  const [showData, setShowData] = useState(false)
+  const [SelectedCountry, setCountry] = useState(countries[0])
 
-          <h3>languages:</h3>
-            <ul>
-              {filteredCountries[0].languages.map(language => 
-                <li key={language.name}>
-                  {language.name} 
-                </li>
-              )}
-            </ul>
-
-          <img src={filteredCountries[0].flags['svg']} width='400' height='200' alt="flag"/>
-      </div>
-    )
+  const ButtonClick = (country) => {
+    setShowData(true)
+    setCountry(country)
   }
-  else if (filteredCountries.length < 10) {
+  
+  if (showData === true) {
+    return (
+      <CountryData country={SelectedCountry} />
+    )
+  } else if (filteredCountries.length < 10) {
     return (
       <div>
         {filteredCountries.map(country => 
           <li key={country.name}>
-            {country.name} 
+            {country.name}<button onClick={() => ButtonClick(country)}>show</button>
           </li>
         )}
       </div>
@@ -68,6 +60,28 @@ const Countries = ({countries, search}) => {
   return (
     <div>
       <p>Too many matches, specify another filter</p>
+    </div>
+  )
+}
+
+
+const CountryData = ({country}) => {
+  return (
+    <div>
+      <h1>{country.name}</h1>
+        <p>capital {country.capital}</p>
+        <p>area {country.area}</p>
+
+        <h3>languages:</h3>
+          <ul>
+            {country.languages.map(language => 
+              <li key={language.name}>
+                {language.name} 
+              </li>
+            )}
+          </ul>
+
+        <img src={country.flags['svg']} width='400' height='200' alt="flag"/>
     </div>
   )
 }
