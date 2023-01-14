@@ -1,17 +1,17 @@
 // Exercises 2.6 to 2.11
+// Exercises 2.15 to 2.18
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import personService from './services'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
 
   useEffect(() => {    
-    console.log('effect')    
-    axios      
-      .get('http://localhost:3001/persons')      
-      .then(response => {        
+    personService      
+      .getAll()      
+      .then(initialPersons => {        
         console.log('promise fulfilled')        
-        setPersons(response.data)      
+        setPersons(initialPersons)      
       })  
     }, [])  
     console.log('render', persons.length, 'persons')
@@ -39,9 +39,13 @@ const App = () => {
     if (persons.some(person => person.name === newName)) {
       alert(`${newName} is already added to phonebook`)
     } else {
-      setPersons(persons.concat(userObject))
-      setNewName('')
-      setNewNumber('')
+      personService
+        .create(userObject)
+        .then(returnedUser => {
+          setPersons(persons.concat(returnedUser))
+          setNewName('')
+          setNewNumber('')
+        })
     }
   }
 
