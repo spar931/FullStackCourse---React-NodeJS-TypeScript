@@ -37,7 +37,14 @@ const App = () => {
       number : newNumber
     }
     if (persons.some(person => person.name === newName)) {
-      alert(`${newName} is already added to phonebook`)
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+        const existingPerson = persons.find(n => n.name === newName)
+        personService
+        .update(existingPerson.id, userObject)
+        .then(returnedPerson => {
+          setPersons(persons.map(person => person.id !== existingPerson.id ? person : returnedPerson))
+        })   
+      }
     } else {
       personService
         .create(userObject)
@@ -79,7 +86,7 @@ const Persons = ({persons, search, setPersons}) => {
   const filteredPersons = persons.filter(person => person.name.includes(search))
 
   const deleteNote = (person) => {
-    if (window.confirm(`Delete ${person.name}?` === true)) {
+    if (window.confirm(`Delete ${person.name}?`)) {
       personService.deletePerson(person.id)
       .catch(error => {
         alert(
