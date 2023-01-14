@@ -60,7 +60,7 @@ const App = () => {
         newName={newName}
         newNumber={newNumber}
       />
-      <Persons persons={persons} search={newFilter} />
+      <Persons persons={persons} search={newFilter} setPersons={setPersons}/>
     </div>
   )
 }
@@ -75,14 +75,28 @@ const Filter = ({handleFilterChange}) => {
 }
 
 
-const Persons = ({persons, search}) => {
+const Persons = ({persons, search, setPersons}) => {
   const filteredPersons = persons.filter(person => person.name.includes(search))
+
+  const deleteNote = (person) => {
+    if (window.confirm(`Delete ${person.name}?` === true)) {
+      personService.deletePerson(person.id)
+      .catch(error => {
+        alert(
+          `${person.name} was already deleted from the server`
+        )
+      })
+      setPersons(persons.filter(p => p.id !== person.id))
+    }
+  }
+
   return (
     <div>
       <h2>Numbers</h2>
         {filteredPersons.map(person => 
-          <li key={person.name}>
-            {person.name} {person.number}
+          <li key={person.id}>
+            {person.name} {person.number} 
+            <button onClick={() => deleteNote(person)}>delete</button>
           </li>
         )}
     </div>
