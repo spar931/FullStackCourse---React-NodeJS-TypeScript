@@ -19,6 +19,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
+  const [notificationMessage, setNotificationMessage] = useState(null)
 
   const handleNameChange = (event) => {
     setNewName(event.target.value.toLowerCase())
@@ -44,6 +45,10 @@ const App = () => {
         .then(returnedPerson => {
           setPersons(persons.map(person => person.id !== existingPerson.id ? person : returnedPerson))
         })   
+        setNotificationMessage(`Updated ${userObject.name}'s number`)
+        setTimeout(() => {          
+          setNotificationMessage(null)        
+        }, 5000)
       }
     } else {
       personService
@@ -52,6 +57,10 @@ const App = () => {
           setPersons(persons.concat(returnedUser))
           setNewName('')
           setNewNumber('')
+          setNotificationMessage(`Added ${userObject.name}`)
+          setTimeout(() => {          
+            setNotificationMessage(null)        
+          }, 5000)
         })
     }
   }
@@ -59,6 +68,7 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
+      <Notification message={notificationMessage} />
       <Filter handleFilterChange={handleFilterChange} />
       <PersonForm 
         addNameAndNumber={addNameAndNumber} 
@@ -67,7 +77,12 @@ const App = () => {
         newName={newName}
         newNumber={newNumber}
       />
-      <Persons persons={persons} search={newFilter} setPersons={setPersons}/>
+      <Persons 
+        persons={persons} 
+        search={newFilter} 
+        setPersons={setPersons}
+        setNotificationMessage={setNotificationMessage}
+      />
     </div>
   )
 }
@@ -82,7 +97,7 @@ const Filter = ({handleFilterChange}) => {
 }
 
 
-const Persons = ({persons, search, setPersons}) => {
+const Persons = ({persons, search, setPersons, setNotificationMessage}) => {
   const filteredPersons = persons.filter(person => person.name.includes(search))
 
   const deleteNote = (person) => {
@@ -94,6 +109,10 @@ const Persons = ({persons, search, setPersons}) => {
         )
       })
       setPersons(persons.filter(p => p.id !== person.id))
+      setNotificationMessage(`Deleted ${person.name}`)
+      setTimeout(() => {          
+        setNotificationMessage(null)        
+      }, 5000)
     }
   }
 
@@ -120,6 +139,19 @@ const PersonForm = ({addNameAndNumber, handleNameChange, handleNumberChange, new
           <div>number: <input value={newNumber} onChange={handleNumberChange}/></div>
           <div><button type="submit">add</button></div>
         </form>
+    </div>
+  )
+}
+
+
+const Notification = ({ message }) => {
+  if (message === null) {
+    return null
+  }
+
+  return (
+    <div className='notification'>
+      {message}
     </div>
   )
 }
