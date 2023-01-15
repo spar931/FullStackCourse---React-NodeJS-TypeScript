@@ -20,6 +20,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
   const [notificationMessage, setNotificationMessage] = useState(null)
+  const [typeOfMessage, setTypeOfMessage] = useState('notification')
 
   const handleNameChange = (event) => {
     setNewName(event.target.value.toLowerCase())
@@ -68,7 +69,7 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
-      <Notification message={notificationMessage} />
+      <Notification message={notificationMessage} typeOfMessage={typeOfMessage}/>
       <Filter handleFilterChange={handleFilterChange} />
       <PersonForm 
         addNameAndNumber={addNameAndNumber} 
@@ -82,6 +83,7 @@ const App = () => {
         search={newFilter} 
         setPersons={setPersons}
         setNotificationMessage={setNotificationMessage}
+        setTypeOfMessage={setTypeOfMessage}
       />
     </div>
   )
@@ -97,21 +99,23 @@ const Filter = ({handleFilterChange}) => {
 }
 
 
-const Persons = ({persons, search, setPersons, setNotificationMessage}) => {
+const Persons = ({persons, search, setPersons, setNotificationMessage, setTypeOfMessage}) => {
   const filteredPersons = persons.filter(person => person.name.includes(search))
 
   const deleteNote = (person) => {
     if (window.confirm(`Delete ${person.name}?`)) {
+      setNotificationMessage(`Deleted ${person.name}`)
       personService.deletePerson(person.id)
       .catch(error => {
-        alert(
+        setTypeOfMessage('error')
+        setNotificationMessage(
           `${person.name} was already deleted from the server`
         )
       })
       setPersons(persons.filter(p => p.id !== person.id))
-      setNotificationMessage(`Deleted ${person.name}`)
       setTimeout(() => {          
         setNotificationMessage(null)        
+        setTypeOfMessage('notification')
       }, 5000)
     }
   }
@@ -144,9 +148,17 @@ const PersonForm = ({addNameAndNumber, handleNameChange, handleNumberChange, new
 }
 
 
-const Notification = ({ message }) => {
+const Notification = ({ message, typeOfMessage}) => {
   if (message === null) {
     return null
+  }
+
+  if (typeOfMessage === 'error') {
+    return (
+      <div id='error' className='notification'>
+        {message}
+      </div>
+    )
   }
 
   return (
