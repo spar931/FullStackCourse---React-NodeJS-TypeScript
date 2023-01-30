@@ -34,3 +34,23 @@ i.e.    const handleClick = () => {    console.log('clicked the button')    setV
    npm install json-server --save-dev - to install json-server as a development dependency
    npm run server to start the json-server
    add "server": "json-server -p3001 --watch db.json" to package.json scripts in order to use command 'npm run server'
+
+10. { ... object, variable to change: new variable} creates a new object with copies of all the properties from the existing object and whatever attributes
+    need to be changed are listed after the comma. Remember never to mutate state directly.
+
+11. Example of map function with condition - notes.map(note => note.id !== id ? note : response.data)
+     if note.id !== id is true; we simply copy the item from the old array into the new array. 
+     If the condition is false, then the note object returned by the server is added to the array instead.
+
+12. Short form for defining an object if property fields and names are the same i.e. name : name, age : age - const person = { name, age }
+
+Node.js
+
+CORS  - npm install cors
+
+        //to allow for requests for all origins
+        const cors = require('cors')
+        app.use(cors())
+
+deploying app - Using Fly.io to deploy, install per guide below
+                https://fly.io/docs/hands-on/install-flyctl/
