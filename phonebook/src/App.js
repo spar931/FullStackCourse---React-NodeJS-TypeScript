@@ -45,11 +45,18 @@ const App = () => {
         .update(existingPerson.id, userObject)
         .then(returnedPerson => {
           setPersons(persons.map(person => person.id !== existingPerson.id ? person : returnedPerson))
+          setNotificationMessage(`Updated ${userObject.name}'s number`)
+          setTimeout(() => {          
+            setNotificationMessage(null)        
+          }, 5000)
         })   
-        setNotificationMessage(`Updated ${userObject.name}'s number`)
-        setTimeout(() => {          
-          setNotificationMessage(null)        
-        }, 5000)
+        .catch(error => {
+          setTypeOfMessage('error')
+          setNotificationMessage(error.response.data.error)
+          setTimeout(() => {          
+            setNotificationMessage(null)        
+          }, 5000)
+        })
       }
     } else {
       personService
