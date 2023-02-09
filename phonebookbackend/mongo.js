@@ -6,7 +6,7 @@ if (process.argv.length<3) {
   process.exit(1)
 }
 
-if (process.argv.length == 4) {
+if (process.argv.length === 4) {
   console.log('missing name or number')
   process.exit(1)
 }
@@ -26,7 +26,7 @@ const personSchema = new mongoose.Schema({
 
 const Person = mongoose.model('Person', personSchema)
 
-if (process.argv.length == 3) {
+if (process.argv.length === 3) {
   Person.find({}).then(result => {
     result.forEach(person => {
       console.log(person)
@@ -36,14 +36,14 @@ if (process.argv.length == 3) {
   })
 }
 
-if (process.argv.length == 5) {
+if (process.argv.length === 5) {
   const person = new Person({
     name: process.argv[3],
     number: process.argv[4],
   })
 
-  person.save().then(result => {
-    console.log('person saved!')
+  person.save().then(
+    console.log('person saved!'),
     mongoose.connection.close()
-  })
+  )
 }
