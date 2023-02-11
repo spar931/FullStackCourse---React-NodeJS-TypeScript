@@ -44,13 +44,33 @@ i.e.    const handleClick = () => {    console.log('clicked the button')    setV
 
 12. Short form for defining an object if property fields and names are the same i.e. name : name, age : age - const person = { name, age }
 
-Node.js
+Node.js - npm init to create a new node.js template
+
+npm scripts - see package.json scripts in phonebookbackend
+
+Express - npm install express
+          // include at top of code
+          const express = require('express')
+          const app = express()
+
+Nodemon - automatically restarts node application if changes are made
+          npm install --save-dev nodemon
+          npm run dev to run in nodemon - see npm scripts above
 
 CORS  - npm install cors
-
         //to allow for requests for all origins
         const cors = require('cors')
         app.use(cors())
 
-deploying app - Using Fly.io to deploy, install per guide below
-                https://fly.io/docs/hands-on/install-flyctl/
+deploying app - Using 'Render' to deploy
+
+Mongoose - npm install mongoose
+           //include in code
+           const mongoose = require('mongoose')
+
+dotenv - to store environment variables. Remember to add to .gitignore if it includes sensitive info.
+         npm install dotenv
+
+Lint - detects and flags errors in programming languages including stylistic errors.
+       npm install eslint --save-dev
+       npx eslint --init : to config lint
