@@ -9,6 +9,22 @@ const totalLikes = (blogs) => {
   return sumLikes;
 };
 
+const favouriteBlog = (blogs) => {
+  let favoriteIndex = 0;
+  let maxLikes = 0;
+  for (let i = 0; i < blogs.length; i++) {
+    if (blogs[i].likes > maxLikes) {
+      maxLikes = blogs[i].likes;
+      favoriteIndex = i;
+    }
+  }
+  return {
+    title: blogs[favoriteIndex].title,
+    author: blogs[favoriteIndex].author,
+    likes: blogs[favoriteIndex].likes,
+  };
+};
+
 module.exports = {
-  totalLikes, dummy,
+  totalLikes, dummy, favouriteBlog,
 };
